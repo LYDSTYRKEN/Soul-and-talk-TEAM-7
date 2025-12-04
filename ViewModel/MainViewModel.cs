@@ -4,6 +4,7 @@ using Soul_and_talk.Model.Repositories;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
+using Soul_and_talk;
 
 namespace Soul_and_talk.ViewModel
 {
@@ -18,12 +19,14 @@ namespace Soul_and_talk.ViewModel
         public ObservableCollection<OverviewNode> RootNodes { get; set; }
 
         public ICommand AddIncomeCommand { get; set; }
+        public ICommand AddCustomerCommand { get; set; }
 
         public MainViewModel()
         {
             RootNodes = new ObservableCollection<OverviewNode>();
 
             AddIncomeCommand = new RelayCommand(AddIncome);
+            AddCustomerCommand = new RelayCommand(AddCustomer);
 
             LoadAllFromFiles();
 
@@ -185,6 +188,24 @@ namespace Soul_and_talk.ViewModel
             RegisterIncome(customer, date, hours, isPhysical, kilometers);
             BuildNodeTree();
         }
+
+        // Called when "Add Customer" button is clicked
+
+        private void AddCustomer()
+        {
+            AddCustomerWindow window = new AddCustomerWindow();
+
+            AddCustomerViewModel vm = new AddCustomerViewModel(this, () => window.Close());
+            window.DataContext = vm;
+
+            window.ShowDialog();
+
+            // Byg træet igen, så den nye kunde vises
+            BuildNodeTree();
+        }
+
+
+
 
         /// <summary>
         /// Oh no
