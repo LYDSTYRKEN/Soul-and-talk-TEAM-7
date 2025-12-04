@@ -57,7 +57,7 @@ namespace Soul_and_talk.ViewModel
 
             Institution privateInst = new Institution();
             privateInst.Id = 4;
-            privateInst.Name = "Fulgereden";
+            privateInst.Name = "Fuglereden";
             privateInst.Type = InstitutionType.Private;
 
             _instRepo.AddInstitution(publicInst1);
@@ -108,8 +108,8 @@ namespace Soul_and_talk.ViewModel
         {
             RootNodes.Clear();
 
-            OverviewNode publicRoot = new OverviewNode("Offentlige Instituationer");
-            OverviewNode privateRoot = new OverviewNode("Private Instituationer");
+            OverviewNode publicRoot = new OverviewNode("Offentlige Institutioner");
+            OverviewNode privateRoot = new OverviewNode("Private Institutioner");
             OverviewNode privateCustomersRoot = new OverviewNode("Private Kunder");
 
             RootNodes.Add(publicRoot);

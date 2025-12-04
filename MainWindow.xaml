@@ -47,7 +47,7 @@
                 HorizontalAlignment="Center">
 
             <Button 
-                Content="Register Ny Kunde"
+                Content="Registrer Ny Kunde"
                     FontSize="15" 
                     FontWeight="Bold"
                     FontFamily="Corbel"
