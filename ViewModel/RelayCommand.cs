@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
-
-using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace Soul_and_talk.ViewModel
 {

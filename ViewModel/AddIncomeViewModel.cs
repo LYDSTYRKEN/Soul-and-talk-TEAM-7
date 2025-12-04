@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Soul_and_talk.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using Soul_and_talk.Model;
 
 namespace Soul_and_talk.ViewModel
 {

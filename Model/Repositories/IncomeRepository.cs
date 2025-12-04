@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Soul_and_talk.Model;
+﻿using System.IO;
 
 namespace Soul_and_talk.Model.Repositories
 {

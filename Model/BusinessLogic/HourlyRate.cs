@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using System;
-using Soul_and_talk.Model;
-using Soul_and_talk.Model;
-
-namespace Soul_and_talk.Model.BusinessLogic
+﻿namespace Soul_and_talk.Model.BusinessLogic
 {
     public class HourlyRate : IHourlyRateCalculator
     {

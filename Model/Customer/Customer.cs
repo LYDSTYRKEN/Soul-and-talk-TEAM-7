@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Soul_and_talk.Model;
-
-namespace Soul_and_talk.Model
+﻿namespace Soul_and_talk.Model
 {
     public class Customer
     {

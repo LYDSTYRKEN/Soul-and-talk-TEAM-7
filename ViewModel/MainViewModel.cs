@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using Soul_and_talk.Model;
 using Soul_and_talk.Model.BusinessLogic;
-using Soul_and_talk.Model;
 using Soul_and_talk.Model.Repositories;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows.Input;
 
 namespace Soul_and_talk.ViewModel
 {
