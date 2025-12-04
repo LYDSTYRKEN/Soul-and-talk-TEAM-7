@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System;
+using Soul_and_talk.Model;
 
-namespace Soul_and_talk.Model.Income
+namespace Soul_and_talk.Model
 {
-    internal class Income
+    public class Income
     {
         public Customer Customer { get; set; }
         public DateTime Date { get; set; }
@@ -12,11 +14,13 @@ namespace Soul_and_talk.Model.Income
         public bool IsPhysical { get; set; }
         public decimal Kilometers { get; set; }
         public decimal Amount { get; set; }
+
         public Income()
         {
             Customer = new Customer();
         }
-
-
     }
 }
+
+
+

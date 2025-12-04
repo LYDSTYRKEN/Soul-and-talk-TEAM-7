@@ -1,152 +1,170 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using Soul_and_talk.Model;
 
 namespace Soul_and_talk.ViewModel
 {
     public class AddIncomeViewModel : ViewModelBase
     {
-        private MainViewModel mainViewModel;
-        private Action close;
+        private MainViewModel _main;
+        private Action _close;
+
         public ObservableCollection<Customer> Customers { get; set; }
         public ObservableCollection<Institution> Institutions { get; set; }
 
-        private Customer selectedCustomer;
+        private Customer _selectedCustomer;
         public Customer SelectedCustomer
         {
-            get { return selectedCustomer; }
+            get { return _selectedCustomer; }
             set
             {
-                selectedCustomer = value;
+                _selectedCustomer = value;
                 OnPropertyChanged("SelectedCustomer");
             }
         }
-        private bool registerNewCustomer;
+
+        private bool _registerNewCustomer;
         public bool RegisterNewCustomer
         {
-            get { return RegisterNewCustomer; }
+            get { return _registerNewCustomer; }
             set
             {
-                RegisterNewCustomer = value;
-                OnPropertyChanged("OpretNewCustomer");
+                _registerNewCustomer = value;
+                OnPropertyChanged("RegisterNewCustomer");
             }
         }
-        private string newCustomerName = "";
+
+        private string _newCustomerName = "";
         public string NewCustomerName
         {
-            get { return newCustomerName; }
+            get { return _newCustomerName; }
             set
             {
-                newCustomerName = value;
+                _newCustomerName = value;
                 OnPropertyChanged("NewCustomerName");
             }
         }
-        private Institution selectedInstitution;
+
+        private Institution _selectedInstitution;
         public Institution SelectedInstitution
         {
-            get { return selectedInstitution; }
+            get { return _selectedInstitution; }
             set
             {
-                selectedInstitution = value;
+                _selectedInstitution = value;
                 OnPropertyChanged("SelectedInstitution");
             }
         }
-        private DateTime date;
+
+        private DateTime _date;
         public DateTime Date
         {
-            get { return date; }
+            get { return _date; }
             set
             {
-                date = value;
+                _date = value;
                 OnPropertyChanged("Date");
             }
         }
-        private decimal hours;
+
+        private decimal _hours;
         public decimal Hours
         {
-            get { return hours; }
+            get { return _hours; }
             set
             {
-                hours = value;
+                _hours = value;
                 OnPropertyChanged("Hours");
             }
         }
-        private bool isPhysical;
+
+        private bool _isPhysical;
         public bool IsPhysical
         {
-            get { return isPhysical; }
+            get { return _isPhysical; }
             set
             {
-                isPhysical = value;
+                _isPhysical = value;
                 OnPropertyChanged("IsPhysical");
             }
         }
-        private decimal kilometers;
+
+        private decimal _kilometers;
         public decimal Kilometers
         {
-            get { return kilometers; }
+            get { return _kilometers; }
             set
             {
-                kilometers = value;
+                _kilometers = value;
                 OnPropertyChanged("Kilometers");
             }
         }
 
-        public ICommand saveCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-        public AddIncomeViewModel(MainViewModel mainViewModel, Action close)
+        public AddIncomeViewModel(MainViewModel main, Action close)
         {
-            this.mainViewModel = mainViewModel;
-            this.close = close;
+            _main = main;
+            _close = close;
 
-            Customers = new ObservableCollection<Customer>(mainViewModel.GetCustomers());
-            Institutions = new ObservableCollection<Institution>(mainViewModel.GetInstitutions);
+            Customers = new ObservableCollection<Customer>(_main.GetCustomers());
+            Institutions = new ObservableCollection<Institution>(_main.GetInstitutions());
 
             RegisterNewCustomer = false;
             Date = DateTime.Today;
             IsPhysical = true;
 
-            saveCommand = new RelayCommand(Save);
+            SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Close);
         }
 
         private void Save()
         {
             Customer customerToUse;
+
             if (RegisterNewCustomer)
             {
                 if (string.IsNullOrWhiteSpace(NewCustomerName))
                 {
-                    MessageBox.Show("Skriv et Name til den nye Customer.");
+                    MessageBox.Show("Please enter a name for the new customer.");
                     return;
                 }
-                CustomerToUse = mainViewModel.AddNewCustomer(NewCustomerName, SelectedInstitution);
+
+                customerToUse = _main.AddNewCustomer(NewCustomerName, SelectedInstitution);
             }
             else
             {
                 if (SelectedCustomer == null)
                 {
-                    MessageBox.Show("Vælg en Customer.");
+                    MessageBox.Show("Please select a customer.");
                     return;
                 }
-                CustomerToUse = SelectedCustomer;
+
+                customerToUse = SelectedCustomer;
             }
+
             if (Hours <= 0)
             {
-                MessageBox.Show("Angiv et gyldigt antal timer.");
+                MessageBox.Show("Hours must be greater than 0.");
                 return;
             }
+
             if (!IsPhysical)
             {
-                kilometers = 0;
+                Kilometers = 0;
             }
-            mainViewModel.AddIncomeFromDialog(CustomerToUse, Date, Hours, IsPhysical, Kilometers);
+
+            _main.AddIncomeFromDialog(customerToUse, Date, Hours, IsPhysical, Kilometers);
 
             Close();
+        }
+
+        private void Close()
+        {
+            _close();
         }
     }
 }

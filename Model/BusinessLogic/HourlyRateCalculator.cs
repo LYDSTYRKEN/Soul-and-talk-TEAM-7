@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Soul_and_talk.Model;
 
 namespace Soul_and_talk.Model.BusinessLogic
 {
-    public interface HourlyRateCalculator
+    public interface IHourlyRateCalculator
     {
-        decimal GetRatePerHour(Customer Customer, bool IsPhysical);
+        decimal GetRatePerHour(Customer customer, bool isPhysical);
     }
 }

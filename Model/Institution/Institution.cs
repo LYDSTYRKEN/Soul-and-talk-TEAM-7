@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Soul_and_talk.Model.Institution
+using System;
+
+namespace Soul_and_talk.Model
 {
-    internal class Institution
+    public class Institution
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public InstitutionType Type { get; set; }
-
     }
 }

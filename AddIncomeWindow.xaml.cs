@@ -1,4 +1,5 @@
-﻿using Soul_and_talk.ViewModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,17 +8,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Soul_and_talk
 {
-    public partial class MainWindow : Window
+    public partial class AddIncomeWindow : Window
     {
-        public MainWindow()
+        public AddIncomeWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
     }
 }

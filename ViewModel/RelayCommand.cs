@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+
+using System;
+using System.Windows.Input;
 
 namespace Soul_and_talk.ViewModel
 {
     public class RelayCommand : ICommand
     {
-        private Action execute;
+        private Action _execute;
 
         public RelayCommand(Action execute)
         {
-            this.execute = execute;
+            _execute = execute;
         }
-        public bool CanExecute(object parameter)
+
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            if (execute != null)
-            {
-                execute();
-            }
+            _execute();
         }
-        public event EventHandler CanExecuteChanged
+
+        public event EventHandler? CanExecuteChanged
         {
             add { }
             remove { }

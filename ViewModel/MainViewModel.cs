@@ -1,21 +1,20 @@
-﻿using Soul_and_talk.Model.BusinessLogic;
-using Soul_and_talk.Model.Institution;
-using Soul_and_talk.Model.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
+using Soul_and_talk.Model.BusinessLogic;
+using Soul_and_talk.Model;
+using Soul_and_talk.Model.Repositories;
 
 namespace Soul_and_talk.ViewModel
 {
-    internal class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
-        private InstitutionRepository instRepo  = new InstitutionRepository();
-        private CustomerRepository custRepo = new CustomerRepository();
-        private IncomeRepository incRepo = new IncomeRepository();
+        private InstitutionRepository _instRepo = new InstitutionRepository();
+        private CustomerRepository _custRepo = new CustomerRepository();
+        private IncomeRepository _incomeRepo = new IncomeRepository();
 
-        private HourlyRate hourlyRate = new HourlyRate();
+        private HourlyRate _hourlyRate = new HourlyRate();
 
         public ObservableCollection<OverviewNode> RootNodes { get; set; }
 
@@ -27,81 +26,84 @@ namespace Soul_and_talk.ViewModel
 
             AddIncomeCommand = new RelayCommand(AddIncome);
 
-            BuildNoteTree();
+            FillInitialData();
+            BuildNodeTree();
         }
-        private void ExistingData()
+
+        private void FillInitialData()
         {
             Institution publicInst1 = new Institution();
             publicInst1.Id = 1;
-            publicInst1.Name = "Kommune 1";
+            publicInst1.Name = "Municipality 1";
             publicInst1.Type = InstitutionType.Public;
 
             Institution publicInst2 = new Institution();
             publicInst2.Id = 2;
-            publicInst2.Name = "Kommune 2";
+            publicInst2.Name = "Municipality 2";
             publicInst2.Type = InstitutionType.Public;
 
-            Institution privateInst3 = new Institution();
-            privateInst3.Id = 3;
-            privateInst3.Name = "Institution 3";
-            privateInst3.Type = InstitutionType.Private;
+            Institution privateInst = new Institution();
+            privateInst.Id = 3;
+            privateInst.Name = "Private institution";
+            privateInst.Type = InstitutionType.Private;
 
-            instRepo.AddInstitution(publicInst1);
-            instRepo.AddInstitution(publicInst2);
-            instRepo.AddInstitution(privateInst3);
+            _instRepo.AddInstitution(publicInst1);
+            _instRepo.AddInstitution(publicInst2);
+            _instRepo.AddInstitution(privateInst);
         }
-        private Income RegisterIncome(Customer Customer, DateTime Date, decimal Hours, bool IsPhysical, decimal Kilometers)
-        {
 
-            decimal HourlyRateCalculator = hourlyRate.GetRatePerHour(Customer, IsPhysical);
+        private Income RegisterIncome(Customer customer, DateTime date, decimal hours, bool isPhysical, decimal kilometers)
+        {
+            decimal rate = _hourlyRate.GetRatePerHour(customer, isPhysical);
 
             Income income = new Income();
-            income.Customer = Customer;
-            income.Date = Date;
-            income.Hours = Hours;
-            income.IsPhysical = IsPhysical;
-            income.Kilometers = Kilometers;
-            income.Amount = HourlyRateCalculator;
-            incRepo.AddIncome(income);
+            income.Customer = customer;
+            income.Date = date;
+            income.Hours = hours;
+            income.IsPhysical = isPhysical;
+            income.Kilometers = kilometers;
+            income.Amount = rate * hours;
+
+            _incomeRepo.AddIncome(income);
 
             return income;
         }
 
         public List<Institution> GetInstitutions()
         {
-            return instRepo.GetAllInstitutions();
+            return _instRepo.GetAllInstitutions();
         }
 
         public List<Customer> GetCustomers()
         {
-            return custRepo.GetAllCustomers();
+            return _custRepo.GetAllCustomers();
         }
 
-        public Customer AddNewCustomer(string Name, Institution institution)
+        public Customer AddNewCustomer(string name, Institution institution)
         {
-            Customer Customer = new Customer();
-            Customer.Id = custRepo.GetAllCustomers().Count + 1;
-            Customer.Name = Name;
-            Customer.Institution = institution;
+            Customer customer = new Customer();
+            customer.Id = _custRepo.GetAllCustomers().Count + 1;
+            customer.Name = name;
+            customer.Institution = institution;
 
-            custRepo.AddCustomer(customer);
-            return Customer;
+            _custRepo.AddCustomer(customer);
+            return customer;
         }
 
-        private void BuildNoteTree()
+        private void BuildNodeTree()
         {
             RootNodes.Clear();
 
-            OverviewNode publicRoot = new OverviewNode("Public Institutions");
-            OverviewNode privateRoot = new OverviewNode("Private Institutions");
-            OverviewNode privateCustomer = new OverviewNode("Private Customers");
+            OverviewNode publicRoot = new OverviewNode("Public institutions");
+            OverviewNode privateRoot = new OverviewNode("Private institutions");
+            OverviewNode privateCustomersRoot = new OverviewNode("Private customers");
 
             RootNodes.Add(publicRoot);
             RootNodes.Add(privateRoot);
-            RootNodes.Add(privateCustomer);
+            RootNodes.Add(privateCustomersRoot);
 
-            List<Institution> institutions = instRepo.GetAllInstitutions();
-            List<Customer> customers = custRepo.GetAllCustomers();
+            List<Institution> institutions = _instRepo.GetAllInstitutions();
+            List<Customer> customers = _custRepo.GetAllCustomers();
 
             foreach (Institution inst in institutions)
             {
@@ -118,7 +120,7 @@ namespace Soul_and_talk.ViewModel
 
                 foreach (Customer cust in customers)
                 {
-                    if (cust.Institution != null && Customer.Institution.id == inst.Id)
+                    if (cust.Institution != null && cust.Institution.Id == inst.Id)
                     {
                         OverviewNode custNode = new OverviewNode(cust.Name, cust);
                         instNode.Children.Add(custNode);
@@ -133,26 +135,28 @@ namespace Soul_and_talk.ViewModel
                 if (cust.Institution == null)
                 {
                     OverviewNode custNode = new OverviewNode(cust.Name, cust);
-                    privateCustomer.Children.Add(custNode);
+                    privateCustomersRoot.Children.Add(custNode);
 
                     AddIncomesToCustomerNode(custNode, cust);
                 }
             }
         }
+
         private void AddIncomesToCustomerNode(OverviewNode custNode, Customer cust)
         {
-            List<Income> incomes = incRepo.GetAllIncomes();
+            List<Income> incomes = _incomeRepo.GetAllIncomes();
 
             foreach (Income inc in incomes)
             {
-                if (inc.customer != null && inc.Customer.Id == Customer.Id) 
+                if (inc.Customer != null && inc.Customer.Id == cust.Id)
                 {
-                    string text = inc.Date.ToShortDateString() + " - " +
+                    string text = inc.Date.ToShortDateString() + " | " +
                                   inc.Hours + " hours | " +
-                                  inc.Amount + " kr.";
-                    if (inc.IsPhysical && inc.kilometers > 0)
-                    { 
-                        text = text + " | " + inc.Kilometers + " km.";
+                                  inc.Amount + " kr";
+
+                    if (inc.IsPhysical && inc.Kilometers > 0)
+                    {
+                        text = text + " | " + inc.Kilometers + " km";
                     }
 
                     OverviewNode incNode = new OverviewNode(text, inc);
@@ -160,6 +164,7 @@ namespace Soul_and_talk.ViewModel
                 }
             }
         }
+
         private void AddIncome()
         {
             AddIncomeWindow window = new AddIncomeWindow();
@@ -170,14 +175,10 @@ namespace Soul_and_talk.ViewModel
             window.ShowDialog();
         }
 
-        public void AddIncomeFromDialog(Customer Customer, DateTime Date Decimal Hours, bool IsPhysical, decimal kilometers)
+        public void AddIncomeFromDialog(Customer customer, DateTime date, decimal hours, bool isPhysical, decimal kilometers)
         {
-            Income inc = RegisterIncome(Customer, Date, Hours, IsPhysical, kilometers);
-            IncomeRepository.AddIncome(inc);
-
-            BuildNoteTree();
-
-            // Gem income til fil eller database her
+            RegisterIncome(customer, date, hours, isPhysical, kilometers);
+            BuildNodeTree();
         }
     }
 }

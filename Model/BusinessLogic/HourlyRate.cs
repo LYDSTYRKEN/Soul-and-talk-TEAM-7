@@ -2,69 +2,42 @@
 using System.Collections.Generic;
 using System.Text;
 
+using System;
+using Soul_and_talk.Model;
+using Soul_and_talk.Model;
+
 namespace Soul_and_talk.Model.BusinessLogic
 {
-    internal class HourlyRate : HourlyRateCalculator
+    public class HourlyRate : IHourlyRateCalculator
     {
-        public decimal GetRatePerHour(Customer Customer, bool IsPhysical)
+        public decimal GetRatePerHour(Customer customer, bool isPhysical)
         {
-            if (Customer.Institution == null)
+            if (customer == null)
             {
-                if (IsPhysical)
-                {
-                    {
-                        return 450m;
-                    }
-                    else
-                    {
-                        return 350m;
-                    }
-                }
-            }
-            
-            if (Customer.Institution.Type == InstitutionType.Puplic)
-            {
-                if (IsPhysical)
-                {
-                    {
-                        return 550m;
-                    }
-                    else
-                    {
-                        return 550m;
-                    }
-                }
-            }
-
-            if (Customer.Institution.Type == InstitutionType.Private)
-            {
-                if (IsPhysical)
-                {
-                    {
-                        return 450m;
-                    }
-                    else
-                    {
-                        return 350m;
-                    }
-                }
-            }
-            if (Customer.Institution.Type == InstitutionType.Private)
-            {
-                if (IsPhysical)
-                {
-                    {
-                        return 450m;
-                    }
-                    else
-                    {
-                        return 350m;
-                    }
-                }
-
                 return 0;
-
             }
+
+            // Privat kunde (ingen institution)
+            if (customer.Institution == null)
+            {
+                if (isPhysical)
+                    return 450m;
+                else
+                    return 350m;
+            }
+
+            // Offentlig institution
+            if (customer.Institution.Type == InstitutionType.Public)
+            {
+                // samme pris fysisk/online
+                return 550m;
+            }
+
+            // Privat institution
+            if (isPhysical)
+                return 450m;
+            else
+                return 350m;
         }
     }
 }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Soul_and_talk.Model.Institution
+namespace Soul_and_talk.Model
 {
-    internal enum InstitutionType
+    public enum InstitutionType
     {
-       Public,
-       Private
+        Public,
+        Private
     }
 }
+

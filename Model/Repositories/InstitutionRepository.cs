@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections.Generic;
+using Soul_and_talk.Model;
+using System.Collections.Generic;
 
 namespace Soul_and_talk.Model.Repositories
 {
     public class InstitutionRepository
     {
-        public List<Institution> Institutions { get; } = new List<Institution.Institution>();
+        private List<Institution> _institutions = new List<Institution>();
+
         public List<Institution> GetAllInstitutions()
         {
-            return Institutions;
-        }
-        public void AddInstitution(Institution institution)
-        {
-            Institutions.Add(institution);
+            return _institutions;
         }
 
+        public void AddInstitution(Institution institution)
+        {
+            _institutions.Add(institution);
+        }
     }
 }

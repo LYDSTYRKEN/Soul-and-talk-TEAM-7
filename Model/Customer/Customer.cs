@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Soul_and_talk.Model;
 
-namespace Soul_and_talk.Model.Customer
+namespace Soul_and_talk.Model
 {
-    internal class Customer
+    public class Customer
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Institution Institution { get; set; }
+
+        public string Name { get; set; } = "";
+
+        // null = private customer
+        public Institution Institution { get; set; }  // gør den bare ikke-nullable for at slippe for bøvl
+
         public bool IsPrivateCustomer
         {
-            get
-            {
-                return Institution == null;
-            }
+            get { return Institution == null; }
         }
     }
 }

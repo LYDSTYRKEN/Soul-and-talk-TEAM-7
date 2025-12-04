@@ -1,0 +1,67 @@
+﻿<Window x:Class="Soul_and_talk.AddIncomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Add income" Height="400" Width="500">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <!-- Vælg eksisterende kunde -->
+            <TextBlock Text="Customer:"/>
+            <ComboBox ItemsSource="{Binding Customers}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedCustomer}" />
+
+            <!-- Registrer ny kunde -->
+            <CheckBox Content="Register new customer"
+                      Margin="0,8,0,0"
+                      IsChecked="{Binding RegisterNewCustomer}" />
+
+            <TextBlock Text="New customer name:" Margin="0,4,0,0"/>
+            <TextBox Text="{Binding NewCustomerName}" />
+
+            <!-- Institution -->
+            <TextBlock Text="Institution:" Margin="0,8,0,0"/>
+            <ComboBox ItemsSource="{Binding Institutions}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedInstitution}" />
+
+            <!-- Dato -->
+            <TextBlock Text="Date:" Margin="0,8,0,0"/>
+            <DatePicker SelectedDate="{Binding Date}" />
+
+            <!-- Timer -->
+            <TextBlock Text="Hours:" Margin="0,8,0,0"/>
+            <TextBox Text="{Binding Hours}" />
+
+            <!-- Fysisk / online -->
+            <CheckBox Content="Physical meeting"
+                      Margin="0,8,0,0"
+                      IsChecked="{Binding IsPhysical}" />
+
+            <!-- Kilometer -->
+            <TextBlock Text="Kilometers:" Margin="0,4,0,0"/>
+            <TextBox Text="{Binding Kilometers}" />
+        </StackPanel>
+
+        <!-- Knapper -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Save"
+                    Width="80"
+                    Margin="0,0,8,0"
+                    Command="{Binding SaveCommand}" />
+            <Button Content="Cancel"
+                    Width="80"
+                    Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

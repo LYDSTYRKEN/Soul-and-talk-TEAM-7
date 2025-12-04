@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Soul_and_talk.Model;
 
-namespace Soul_and_talk.Model.Repositories
+
+namespace Soul_and_talk.Model
 {
     public class IncomeRepository
     {
-        public List<Income> Incomes { get; } = new List<Income>();
+        private List<Income> _incomes = new List<Income>();
 
         public List<Income> GetAllIncomes()
         {
-            return Incomes;
+            return _incomes;
         }
+
         public void AddIncome(Income income)
         {
-            Incomes.Add(income);
+            _incomes.Add(income);
         }
     }
 }
