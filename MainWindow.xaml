@@ -36,7 +36,7 @@
         </StackPanel>
 
         <TreeView Grid.Row="1" Grid.Column="0"
-          Margin="10,0,10,10"
+          Margin="10,0,10,0"
           ItemsSource="{Binding RootNodes}">
         </TreeView>
 
@@ -48,7 +48,7 @@
 
             <Button 
                 Content="Register Ny Kunde"
-                    FontSize="18" 
+                    FontSize="15" 
                     FontWeight="Bold"
                     FontFamily="Corbel"
                 Width="170"
@@ -57,7 +57,7 @@
 
             <Button 
                 Content="Tilføj Indtægt"
-                    FontSize="18" 
+                    FontSize="15" 
                     FontWeight="Bold"
                     FontFamily="Corbel"
                 Width="125"
