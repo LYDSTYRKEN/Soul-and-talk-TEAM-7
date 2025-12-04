@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.IO;
 using Soul_and_talk.Model;
 
-namespace Soul_and_talk.Model
+namespace Soul_and_talk.Model.Repositories
 {
     public class CustomerRepository
     {
@@ -17,6 +16,25 @@ namespace Soul_and_talk.Model
         public void AddCustomer(Customer customer)
         {
             _customers.Add(customer);
+        }
+
+        // id;name;institutionId (0 = no institution)
+        public void SaveToFile(string path)
+        {
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                foreach (Customer c in _customers)
+                {
+                    int instId = 0;
+                    if (c.Institution != null)
+                    {
+                        instId = c.Institution.Id;
+                    }
+
+                    string line = c.Id + ";" + c.Name + ";" + instId;
+                    writer.WriteLine(line);
+                }
+            }
         }
     }
 }

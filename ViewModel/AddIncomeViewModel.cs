@@ -159,6 +159,8 @@ namespace Soul_and_talk.ViewModel
 
             _main.AddIncomeFromDialog(customerToUse, Date, Hours, IsPhysical, Kilometers);
 
+            _main.SaveAllToFiles();
+
             Close();
         }
 

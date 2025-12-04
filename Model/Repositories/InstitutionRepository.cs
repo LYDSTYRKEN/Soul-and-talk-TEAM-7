@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using Soul_and_talk.Model;
-using System.Collections.Generic;
 
 namespace Soul_and_talk.Model.Repositories
 {
@@ -19,6 +16,19 @@ namespace Soul_and_talk.Model.Repositories
         public void AddInstitution(Institution institution)
         {
             _institutions.Add(institution);
+        }
+
+        // id;name;type
+        public void SaveToFile(string path)
+        {
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                foreach (Institution inst in _institutions)
+                {
+                    string line = inst.Id + ";" + inst.Name + ";" + inst.Type;
+                    writer.WriteLine(line);
+                }
+            }
         }
     }
 }
