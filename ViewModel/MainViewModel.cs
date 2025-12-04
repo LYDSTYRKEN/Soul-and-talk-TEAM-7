@@ -42,21 +42,27 @@ namespace Soul_and_talk.ViewModel
         {
             Institution publicInst1 = new Institution();
             publicInst1.Id = 1;
-            publicInst1.Name = "Municipality 1";
+            publicInst1.Name = "Kolding Kommune";
             publicInst1.Type = InstitutionType.Public;
 
             Institution publicInst2 = new Institution();
             publicInst2.Id = 2;
-            publicInst2.Name = "Municipality 2";
+            publicInst2.Name = "Haderslev Kommune";
             publicInst2.Type = InstitutionType.Public;
 
+            Institution publicInst3 = new Institution();
+            publicInst3.Id = 3;
+            publicInst3.Name = "Horsens Kommune";
+            publicInst3.Type = InstitutionType.Public;
+
             Institution privateInst = new Institution();
-            privateInst.Id = 3;
-            privateInst.Name = "Private institution";
+            privateInst.Id = 4;
+            privateInst.Name = "Fulgereden";
             privateInst.Type = InstitutionType.Private;
 
             _instRepo.AddInstitution(publicInst1);
             _instRepo.AddInstitution(publicInst2);
+            _instRepo.AddInstitution(publicInst3);
             _instRepo.AddInstitution(privateInst);
         }
 
@@ -102,9 +108,9 @@ namespace Soul_and_talk.ViewModel
         {
             RootNodes.Clear();
 
-            OverviewNode publicRoot = new OverviewNode("Public institutions");
-            OverviewNode privateRoot = new OverviewNode("Private institutions");
-            OverviewNode privateCustomersRoot = new OverviewNode("Private customers");
+            OverviewNode publicRoot = new OverviewNode("Offentlige Instituationer");
+            OverviewNode privateRoot = new OverviewNode("Private Instituationer");
+            OverviewNode privateCustomersRoot = new OverviewNode("Private Kunder");
 
             RootNodes.Add(publicRoot);
             RootNodes.Add(privateRoot);
@@ -159,8 +165,8 @@ namespace Soul_and_talk.ViewModel
                 if (inc.Customer != null && inc.Customer.Id == cust.Id)
                 {
                     string text = inc.Date.ToShortDateString() + " | " +
-                                  inc.Hours + " hours | " +
-                                  inc.Amount + " kr";
+                                  inc.Hours + " Timer | " +
+                                  inc.Amount + " kr.";
 
                     if (inc.IsPhysical && inc.Kilometers > 0)
                     {

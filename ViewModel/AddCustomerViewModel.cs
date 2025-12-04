@@ -53,7 +53,7 @@ namespace Soul_and_talk.ViewModel
         {
             if (string.IsNullOrWhiteSpace(CustomerName))
             {
-                MessageBox.Show("Please enter a customer name.");
+                MessageBox.Show("Skriv Kunde Navn.");
                 return;
             }
 

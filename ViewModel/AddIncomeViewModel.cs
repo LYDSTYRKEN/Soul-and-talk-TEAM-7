@@ -128,7 +128,7 @@ namespace Soul_and_talk.ViewModel
             {
                 if (string.IsNullOrWhiteSpace(NewCustomerName))
                 {
-                    MessageBox.Show("Please enter a name for the new customer.");
+                    MessageBox.Show("Skriv navn på den nye kunde.");
                     return;
                 }
 
@@ -138,7 +138,7 @@ namespace Soul_and_talk.ViewModel
             {
                 if (SelectedCustomer == null)
                 {
-                    MessageBox.Show("Please select a customer.");
+                    MessageBox.Show("Vælg Kunde.");
                     return;
                 }
 
@@ -147,7 +147,7 @@ namespace Soul_and_talk.ViewModel
 
             if (Hours <= 0)
             {
-                MessageBox.Show("Hours must be greater than 0.");
+                MessageBox.Show("Timer skal være mere en 0.");
                 return;
             }
 
