@@ -242,7 +242,7 @@ namespace Soul_and_talk.ViewModel
                     _instRepo.AddInstitution(inst);
                 }
             }
-
+            // Marius Her -
             // 2) Customers
             if (File.Exists("customers.txt"))
             {
@@ -276,7 +276,7 @@ namespace Soul_and_talk.ViewModel
                     _custRepo.AddCustomer(cust);
                 }
             }
-
+            // Til her - 
             // 3) Incomes
             if (File.Exists("incomes.txt"))
             {

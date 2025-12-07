@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Input;
 using Soul_and_talk.Model;
 
+// Janick Her
+
 namespace Soul_and_talk.ViewModel
 {
     public class AddCustomerViewModel : ViewModelBase
@@ -69,3 +71,4 @@ namespace Soul_and_talk.ViewModel
         }
     }
 }
+// Janick Til Her

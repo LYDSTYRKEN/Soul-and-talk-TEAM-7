@@ -1,5 +1,5 @@
 ﻿using System.IO;
-
+   // Marius her
 namespace Soul_and_talk.Model.Repositories
 {
     public class CustomerRepository
@@ -15,7 +15,7 @@ namespace Soul_and_talk.Model.Repositories
         {
             _customers.Add(customer);
         }
-
+     
         // id;name;institutionId (0 = no institution)
         public void SaveToFile(string path)
         {
@@ -34,5 +34,7 @@ namespace Soul_and_talk.Model.Repositories
                 }
             }
         }
+       
     }
 }
+ // Marius Her

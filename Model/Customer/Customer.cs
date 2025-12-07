@@ -1,4 +1,6 @@
-﻿namespace Soul_and_talk.Model
+﻿// Peter her
+
+namespace Soul_and_talk.Model
 {
     public class Customer
     {
@@ -15,3 +17,5 @@
         }
     }
 }
+
+// Peter Til Her
