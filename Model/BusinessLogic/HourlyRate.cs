@@ -34,6 +34,6 @@ namespace Soul_and_talk.Model.BusinessLogic
                 return 350m;
         }
     }
-}
+}   
 
 // Peter Til Her

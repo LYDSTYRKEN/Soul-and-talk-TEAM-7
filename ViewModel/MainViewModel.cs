@@ -209,13 +209,7 @@ namespace Soul_and_talk.ViewModel
             // Byg træet igen, så den nye kunde vises
             BuildNodeTree();
         }
-
-
-
-
-        /// <summary>
-        /// Oh no
-        /// </summary>
+       
         public void SaveAllToFiles()
         {
             _instRepo.SaveToFile("institutions.txt");
@@ -225,96 +219,9 @@ namespace Soul_and_talk.ViewModel
 
         private void LoadAllFromFiles()
         {
-            // 1) Institutions
-            if (File.Exists("institutions.txt"))
-            {
-                string[] lines = File.ReadAllLines("institutions.txt");
-
-                foreach (string line in lines)
-                {
-                    string[] parts = line.Split(';');   // 0=Id, 1=Name, 2=Type
-
-                    Institution inst = new Institution();
-                    inst.Id = int.Parse(parts[0]);
-                    inst.Name = parts[1];
-                    inst.Type = (InstitutionType)Enum.Parse(typeof(InstitutionType), parts[2]);
-
-                    _instRepo.AddInstitution(inst);
-                }
-            }
-            // Marius Her -
-            // 2) Customers
-            if (File.Exists("customers.txt"))
-            {
-                string[] lines = File.ReadAllLines("customers.txt");
-                List<Institution> institutions = _instRepo.GetAllInstitutions();
-
-                foreach (string line in lines)
-                {
-                    string[] parts = line.Split(';');   // 0=Id, 1=Name, 2=InstitutionId
-
-                    Customer cust = new Customer();
-                    cust.Id = int.Parse(parts[0]);
-                    cust.Name = parts[1];
-                    int instId = int.Parse(parts[2]);
-
-                    if (instId != 0)
-                    {
-                        Institution foundInst = null;
-                        foreach (Institution inst in institutions)
-                        {
-                            if (inst.Id == instId)
-                            {
-                                foundInst = inst;
-                                break;
-                            }
-                        }
-
-                        cust.Institution = foundInst;
-                    }
-
-                    _custRepo.AddCustomer(cust);
-                }
-            }
-            // Til her - 
-            // 3) Incomes
-            if (File.Exists("incomes.txt"))
-            {
-                string[] lines = File.ReadAllLines("incomes.txt");
-                List<Customer> customers = _custRepo.GetAllCustomers();
-
-                foreach (string line in lines)
-                {
-                    string[] parts = line.Split(';');   // 0=CustomerId, 1=Date, 2=Hours, 3=IsPhysical, 4=Km, 5=Amount
-
-                    int customerId = int.Parse(parts[0]);
-
-                    Customer foundCustomer = null;
-                    foreach (Customer c in customers)
-                    {
-                        if (c.Id == customerId)
-                        {
-                            foundCustomer = c;
-                            break;
-                        }
-                    }
-
-                    if (foundCustomer == null)
-                        continue;
-
-                    Income inc = new Income();
-                    inc.Customer = foundCustomer;
-                    inc.Date = DateTime.Parse(parts[1]);
-                    inc.Hours = decimal.Parse(parts[2]);
-                    inc.IsPhysical = bool.Parse(parts[3]);
-                    inc.Kilometers = decimal.Parse(parts[4]);
-                    inc.Amount = decimal.Parse(parts[5]);
-
-                    _incomeRepo.AddIncome(inc);
-                }
-            }
+            _instRepo.LoadFromFile("institutions.txt");
+            _custRepo.LoadFromFile("customers.txt");
+            _incomeRepo.LoadFromFile("incomes.txt");
         }
-
-
     }
 }
