@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
 using Soul_and_talk;
+using Soul_and_talk.Commands;
 
 namespace Soul_and_talk.ViewModel
 {
@@ -18,15 +19,12 @@ namespace Soul_and_talk.ViewModel
 
         public ObservableCollection<OverviewNode> RootNodes { get; set; }
 
-        public ICommand AddIncomeCommand { get; set; }
-        public ICommand AddCustomerCommand { get; set; }
+        public ICommand AddIncomeCommand { get; set; } = new AddIncomeCommand();
+        public ICommand AddCustomerCommand { get; set; } = new AddCustomerCommand();
 
         public MainViewModel()
         {
             RootNodes = new ObservableCollection<OverviewNode>();
-
-            AddIncomeCommand = new RelayCommand(AddIncome);
-            AddCustomerCommand = new RelayCommand(AddCustomer);
 
             LoadAllFromFiles();
 
@@ -179,7 +177,7 @@ namespace Soul_and_talk.ViewModel
             }
         }
 
-        private void AddIncome()
+        public void AddIncome()
         {
             AddIncomeWindow window = new AddIncomeWindow();
 
@@ -197,7 +195,7 @@ namespace Soul_and_talk.ViewModel
 
         // Called when "Add Customer" button is clicked
 
-        private void AddCustomer()
+        public void AddCustomer()
         {
             AddCustomerWindow window = new AddCustomerWindow();
 

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Soul_and_talk.Commands;
+using Soul_and_talk.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using Soul_and_talk.Model;
 
-// Janick Her
+
 
 namespace Soul_and_talk.ViewModel
 {
@@ -17,7 +18,7 @@ namespace Soul_and_talk.ViewModel
 
         private string _customerName = "";
         public string CustomerName
-        {
+        {   
             get { return _customerName; }
             set
             {
@@ -37,8 +38,9 @@ namespace Soul_and_talk.ViewModel
             }
         }
 
-        public ICommand SaveCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
+        public ICommand SaveCustomerCommand { get; set; } = new SaveCustomerCommand();
+        public ICommand CancelCustomerCommand { get; set; } = new CancelCustomerCommand();
+
 
         public AddCustomerViewModel(MainViewModel main, Action close)
         {
@@ -47,15 +49,15 @@ namespace Soul_and_talk.ViewModel
 
             Institutions = new ObservableCollection<Institution>(_main.GetInstitutions());
 
-            SaveCommand = new RelayCommand(Save);
-            CancelCommand = new RelayCommand(Close);
+
         }
 
-        private void Save()
+        public void Save()
         {
             if (string.IsNullOrWhiteSpace(CustomerName))
             {
                 MessageBox.Show("Skriv Kunde Navn.");
+
                 return;
             }
 
@@ -65,10 +67,10 @@ namespace Soul_and_talk.ViewModel
             Close();
         }
 
-        private void Close()
+        public void Close()
         {
             _close();
         }
     }
 }
-// Janick Til Her
+

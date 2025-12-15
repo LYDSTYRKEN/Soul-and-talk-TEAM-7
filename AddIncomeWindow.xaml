@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Add income"
+        Title="Registrer indkomst"
         Height="400"
         Width="500">
 
@@ -22,11 +22,11 @@
                       SelectedItem="{Binding SelectedCustomer}" />
 
             <!-- Registrer ny kunde -->
-            <CheckBox Content="Register ny kunde"
+            <CheckBox Content="Registrer ny kunde"
                       Margin="0,10,0,0"
                       IsChecked="{Binding RegisterNewCustomer}" />
 
-            <TextBlock Text="Ny kunde navn:" Margin="0,10,0,0" />
+            <TextBlock Text="Navn på ny kunde:" Margin="0,10,0,0" />
             <TextBox Text="{Binding NewCustomerName}" />
 
             <!-- Institution -->
@@ -60,10 +60,10 @@
             <Button Content="Gem"
                     Width="80"
                     Margin="0,0,10,0"
-                    Command="{Binding SaveCommand}" />
+                    Command="{Binding Path=SaveIncomeCommand}" CommandParameter="{Binding}"/>
             <Button Content="Annuller"
                     Width="80"
-                    Command="{Binding CancelCommand}" />
+                    Command="{Binding Path=CancelIncomeCommand}" CommandParameter="{Binding}"/>
         </StackPanel>
     </Grid>
 </Window>

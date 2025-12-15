@@ -53,7 +53,7 @@
                     FontFamily="Corbel"
                 Width="170"
                 Margin="0,0,10,0"
-                Command="{Binding AddCustomerCommand}" />
+                Command="{Binding Path=AddCustomerCommand}" CommandParameter="{Binding}"/>
 
             <Button 
                 Content="Tilføj Indtægt"
@@ -62,7 +62,7 @@
                     FontFamily="Corbel"
                 Width="125"
                  Margin="0,0,0,0"
-                Command="{Binding AddIncomeCommand}" />
+                Command="{Binding Path=AddIncomeCommand}" CommandParameter="{Binding}"/>
         </StackPanel>
     </Grid>
 </Window>

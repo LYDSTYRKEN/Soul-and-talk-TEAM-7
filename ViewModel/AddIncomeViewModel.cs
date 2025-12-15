@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using Soul_and_talk.Commands;
 
 namespace Soul_and_talk.ViewModel
 {
@@ -101,8 +102,8 @@ namespace Soul_and_talk.ViewModel
             }
         }
 
-        public ICommand SaveCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
+        public ICommand SaveIncomeCommand { get; set; } = new SaveIncomeCommand();
+        public ICommand CancelIncomeCommand { get; set; } = new CancelIncomeCommand();
 
         public AddIncomeViewModel(MainViewModel main, Action close)
         {
@@ -116,11 +117,9 @@ namespace Soul_and_talk.ViewModel
             Date = DateTime.Today;
             IsPhysical = true;
 
-            SaveCommand = new RelayCommand(Save);
-            CancelCommand = new RelayCommand(Close);
         }
 
-        private void Save()
+        public void SaveIncome()
         {
             Customer customerToUse;
 
@@ -160,10 +159,11 @@ namespace Soul_and_talk.ViewModel
 
             _main.SaveAllToFiles();
 
-            Close();
+            _close();
         }
+        
 
-        private void Close()
+        public void CancelIncome()
         {
             _close();
         }
