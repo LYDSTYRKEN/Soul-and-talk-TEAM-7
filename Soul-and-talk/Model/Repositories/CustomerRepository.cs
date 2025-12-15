@@ -1,5 +1,4 @@
 ﻿using System.IO;
-   // Marius her
 namespace Soul_and_talk.Model.Repositories
 {
     public class CustomerRepository
@@ -37,4 +36,3 @@ namespace Soul_and_talk.Model.Repositories
        
     }
 }
- // Marius Her

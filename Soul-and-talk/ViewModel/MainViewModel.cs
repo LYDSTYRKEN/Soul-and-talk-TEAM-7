@@ -208,12 +208,6 @@ namespace Soul_and_talk.ViewModel
             BuildNodeTree();
         }
 
-
-
-
-        /// <summary>
-        /// Oh no
-        /// </summary>
         public void SaveAllToFiles()
         {
             _instRepo.SaveToFile("institutions.txt");

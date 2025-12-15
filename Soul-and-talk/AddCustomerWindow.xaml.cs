@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace Soul_and_talk
 {
-    /// <summary>
-    /// Interaction logic for AddCustomerWindow.xaml
-    /// </summary>
     public partial class AddCustomerWindow : Window
     {
         public AddCustomerWindow()
