@@ -217,24 +217,11 @@ namespace Soul_and_talk.ViewModel
 
         private void LoadAllFromFiles()
         {
+            _instRepo.LoadFromFile("institutions.txt");
+            _custRepo.LoadFromFile("customers.txt");
+            _incomeRepo.LoadFromFile("incomes.txt");
+
             
-            // 1) Institutions
-            if (File.Exists("institutions.txt"))
-            {
-                string[] lines = File.ReadAllLines("institutions.txt");
-
-                foreach (string line in lines)
-                {
-                    string[] parts = line.Split(';');   // 0=Id, 1=Name, 2=Type
-
-                    Institution inst = new Institution();
-                    inst.Id = int.Parse(parts[0]);
-                    inst.Name = parts[1];
-                    inst.Type = (InstitutionType)Enum.Parse(typeof(InstitutionType), parts[2]);
-
-                    _instRepo.AddInstitution(inst);
-                }
-            }
             // 2) Customers
             if (File.Exists("customers.txt"))
             {

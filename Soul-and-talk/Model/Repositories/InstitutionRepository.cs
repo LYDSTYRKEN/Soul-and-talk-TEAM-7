@@ -28,5 +28,25 @@ namespace Soul_and_talk.Model.Repositories
                 }
             }
         }
+        public void LoadFromFile(string path)
+        {
+            // 1) Institutions
+            if (File.Exists("institutions.txt"))
+            {
+                string[] lines = File.ReadAllLines("institutions.txt");
+
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(';');   // 0=Id, 1=Name, 2=Type
+
+                    Institution inst = new Institution();
+                    inst.Id = int.Parse(parts[0]);
+                    inst.Name = parts[1];
+                    inst.Type = (InstitutionType)Enum.Parse(typeof(InstitutionType), parts[2]);
+
+                    AddInstitution(inst);
+                }
+            }
+        }
     }
 }
