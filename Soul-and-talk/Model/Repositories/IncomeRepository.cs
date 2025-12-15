@@ -21,6 +21,9 @@ namespace Soul_and_talk.Model.Repositories
         {
             _incomes.Add(income);
         }
+        public IncomeRepository()
+        {
+        }
 
         //--------------------- Save To File --------------------------
 

@@ -23,6 +23,10 @@ namespace Soul_and_talk.Model.Repositories
             _customers.Add(customer);
         }
 
+        public CustomerRepository()
+        {
+        }
+
         //--------------------- Save To File --------------------------
 
         // id;name;institutionId (0 = no institution)
