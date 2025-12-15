@@ -1,6 +1,4 @@
-﻿//Peter Her
-
-namespace Soul_and_talk.Model.BusinessLogic
+﻿namespace Soul_and_talk.Model.BusinessLogic
 {
     public class HourlyRate : IHourlyRateCalculator
     {
@@ -35,5 +33,3 @@ namespace Soul_and_talk.Model.BusinessLogic
         }
     }
 }
-
-// Peter Til Her
