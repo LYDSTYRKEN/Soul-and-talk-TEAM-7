@@ -208,12 +208,6 @@ namespace Soul_and_talk.ViewModel
             BuildNodeTree();
         }
 
-
-
-
-        /// <summary>
-        /// Oh no
-        /// </summary>
         public void SaveAllToFiles()
         {
             _instRepo.SaveToFile("institutions.txt");
@@ -223,6 +217,7 @@ namespace Soul_and_talk.ViewModel
 
         private void LoadAllFromFiles()
         {
+            
             // 1) Institutions
             if (File.Exists("institutions.txt"))
             {
