@@ -6,6 +6,12 @@ namespace Soul_and_talk.Model.Repositories
     public class CustomerRepository
     {
         private List<Customer> _customers = new List<Customer>();
+        private readonly InstitutionRepository _instRepo;
+
+        public CustomerRepository(InstitutionRepository instRepo)
+        {
+            _instRepo = instRepo;
+        }
 
         public List<Customer> GetAllCustomers()
         {
@@ -16,6 +22,8 @@ namespace Soul_and_talk.Model.Repositories
         {
             _customers.Add(customer);
         }
+
+        //--------------------- Save To File --------------------------
 
         // id;name;institutionId (0 = no institution)
         public void SaveToFile(string path)
@@ -35,13 +43,15 @@ namespace Soul_and_talk.Model.Repositories
                 }
             }
         }
-        {public void LoadFromFile(string path)
+
+        //--------------------- Load From File --------------------------
+
+        public void LoadFromFile(string path)
         {
-            // 2) Customers
             if (File.Exists("customers.txt"))
             {
                 string[] lines = File.ReadAllLines("customers.txt");
-                List<Institution> institutions = _institutions.GetAllInstitutions();
+                List<Institution> institutions = _instRepo.GetAllInstitutions();
 
                 foreach (string line in lines)
                 {
@@ -72,7 +82,5 @@ namespace Soul_and_talk.Model.Repositories
             }
         }
     }
-
-        
-    }
+}
 

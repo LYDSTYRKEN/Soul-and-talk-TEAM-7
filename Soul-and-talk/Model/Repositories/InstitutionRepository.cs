@@ -48,5 +48,32 @@ namespace Soul_and_talk.Model.Repositories
                 }
             }
         }
+        public void FillInitialData()
+        {
+            Institution publicInst1 = new Institution();
+            publicInst1.Id = 1;
+            publicInst1.Name = "Kolding Kommune";
+            publicInst1.Type = InstitutionType.Public;
+
+            Institution publicInst2 = new Institution();
+            publicInst2.Id = 2;
+            publicInst2.Name = "Haderslev Kommune";
+            publicInst2.Type = InstitutionType.Public;
+
+            Institution publicInst3 = new Institution();
+            publicInst3.Id = 3;
+            publicInst3.Name = "Horsens Kommune";
+            publicInst3.Type = InstitutionType.Public;
+
+            Institution privateInst = new Institution();
+            privateInst.Id = 4;
+            privateInst.Name = "Fuglereden";
+            privateInst.Type = InstitutionType.Private;
+
+            AddInstitution(publicInst1);
+            AddInstitution(publicInst2);
+            AddInstitution(publicInst3);
+            AddInstitution(privateInst);
+        }
     }
 }
